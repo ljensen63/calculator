@@ -2,13 +2,18 @@ const operators = ['+', '-', '*', '/'];
 const nums = document.querySelectorAll('.num');
 const ops = document.querySelectorAll('.op');
 const clear = document.querySelector('.clear')
+const calcWindow = document.querySelector('.currentOperation');
 let currentNum = '';
 let currentOp = '';
 let prevNum = '';
 let total = 0;
 
+
+//need to debug both loops below to make sure calculator display works
 nums.forEach(num => num.addEventListener('click', () => {
     currentNum += num.textContent;
+    calcWindow.innerHTML = prevNum + ' ' + currentOp + ' ' + currentNum;
+    
     console.log(currentNum);
 }));
 
@@ -28,7 +33,16 @@ ops.forEach(op => op.addEventListener('click', () => {
         prevNum = currentNum;
         currentNum = '';
     }
+    calcWindow.innerHTML = prevNum + ' ' + currentOp + ' ' + currentNum;
 }));
+
+clear.addEventListener('click', () => {
+    currentNum = '';
+    currentOp = '';
+    prevNum = '';
+    total = 0;
+    calcWindow.innerHTML = 0;
+});
 
 function add(num1, num2){
     return num1 + num2;
