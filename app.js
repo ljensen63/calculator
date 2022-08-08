@@ -9,40 +9,7 @@ let prevNum = '';
 let total = 0;
 
 
-//need to debug both loops below to make sure calculator display works
-nums.forEach(num => num.addEventListener('click', () => {
-    currentNum += num.textContent;
-    calcWindow.innerHTML = prevNum + ' ' + currentOp + ' ' + currentNum;
-    
-    console.log(currentNum);
-}));
 
-ops.forEach(op => op.addEventListener('click', () => {
-    if(currentOp !== ''){
-        if(prevNum === '' || currentNum === '' ){
-            alert('Please enter 2 different numbers before trying another operation')
-            return;
-        }else{
-            total = operate(prevNum, currentNum, currentOp);
-            prevNum = total;
-            total = 0;
-            currentOp = op.textContent;
-        }
-    }else{
-        currentOp = op.textContent;
-        prevNum = currentNum;
-        currentNum = '';
-    }
-    calcWindow.innerHTML = prevNum + ' ' + currentOp + ' ' + currentNum;
-}));
-
-clear.addEventListener('click', () => {
-    currentNum = '';
-    currentOp = '';
-    prevNum = '';
-    total = 0;
-    calcWindow.innerHTML = 0;
-});
 
 function add(num1, num2){
     return num1 + num2;
@@ -78,4 +45,57 @@ function operate(num1, num2, operator){
     return 'Please use a math operation';
 }
 
+//need to debug both loops below to make sure calculator display works
+nums.forEach(num => num.addEventListener('click', () => {
+    currentNum += num.textContent;
+
+    if(currentOp !== ''){
+        calcWindow.textContent = prevNum + ' ' + currentOp + ' ' + currentNum;
+    }else{
+        calcWindow.textContent = currentNum;
+    }
+    //calcWindow.innerHTML = prevNum + ' ' + currentOp + ' ' + currentNum;
+    //console.log(currentNum);
+}));
+
+//check to make sure that when equal is pressed operate is working correctly
+ops.forEach(op => op.addEventListener('click', () => {
+    
+    if(currentOp !== ''){
+        if(prevNum === '' || currentNum === '' ){
+            alert('Please enter 2 different numbers before trying another operation')
+            return;
+        }
+        else{
+            //This will be if there are 2 numbers and and operator 
+            //saved and another operator is pressed
+            total = operate(parseInt(prevNum, 10),parseInt(currentNum, 10), currentOp);
+            prevNum = total;
+            if(op.textContent === '='){
+                currentOp = '';
+            }else {
+                currentOp = op.textContent;
+            }
+            currentNum = '';
+        }
+    }else{
+        currentOp = op.textContent;
+        prevNum = currentNum;
+        currentNum = '';
+    }
+    //calcWindow.innerHTML = prevNum + ' ' + currentOp + ' ' + currentNum;
+    if( currentOp !== ''){
+        calcWindow.textContent = prevNum + ' ' + currentOp;
+    }else{
+        calcWindow.textContent = prevNum;
+    }
+}));
+
+clear.addEventListener('click', () => {
+    currentNum = '';
+    currentOp = '';
+    prevNum = '';
+    total = 0;
+    calcWindow.innerHTML = 0;
+});
 
