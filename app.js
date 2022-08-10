@@ -79,9 +79,13 @@ ops.forEach(op => op.addEventListener('click', () => {
             currentNum = '';
         }
     }else{
-        currentOp = op.textContent;
-        prevNum = currentNum;
-        currentNum = '';
+        if(total != 0){
+           currentOp = op.textContent;
+        }else {
+            currentOp = op.textContent;
+            prevNum = currentNum;
+            currentNum = '';
+        }
     }
     //calcWindow.innerHTML = prevNum + ' ' + currentOp + ' ' + currentNum;
     if( currentOp !== ''){
