@@ -62,7 +62,7 @@ nums.forEach(num => num.addEventListener('click', () => {
 ops.forEach(op => op.addEventListener('click', () => {
     
     if(currentOp !== ''){
-        if(prevNum === '' || currentNum === '' ){
+        if(currentNum === '' ){
             alert('Please enter 2 different numbers before trying another operation')
             return;
         }
@@ -79,12 +79,17 @@ ops.forEach(op => op.addEventListener('click', () => {
             currentNum = '';
         }
     }else{
-        if(total != 0){
-           currentOp = op.textContent;
-        }else {
+        if(op.textContent === '='){
+            return;
+        }
+        else {
+            if(total != 0){
             currentOp = op.textContent;
-            prevNum = currentNum;
-            currentNum = '';
+            }else {
+                currentOp = op.textContent;
+                prevNum = currentNum;
+                currentNum = '';
+            }
         }
     }
     //calcWindow.innerHTML = prevNum + ' ' + currentOp + ' ' + currentNum;
