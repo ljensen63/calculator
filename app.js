@@ -69,14 +69,19 @@ ops.forEach(op => op.addEventListener('click', () => {
         else{
             //This will be if there are 2 numbers and and operator 
             //saved and another operator is pressed
-            total = operate(parseInt(prevNum, 10),parseInt(currentNum, 10), currentOp);
-            prevNum = total;
-            if(op.textContent === '='){
-                currentOp = '';
-            }else {
-                currentOp = op.textContent;
+            if(currentNum === '0' && currentOp === '/'){
+                alert('NO DIVING BY ZERO');
+                currentNum = '';
+            }else{
+                total = operate(parseInt(prevNum, 10),parseInt(currentNum, 10), currentOp);
+                prevNum = total;
+                if(op.textContent === '='){
+                    currentOp = '';
+                }else {
+                    currentOp = op.textContent;
+                }
+                currentNum = '';
             }
-            currentNum = '';
         }
     }else{
         if(op.textContent === '='){

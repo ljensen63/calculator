@@ -3,6 +3,9 @@
     max-width: 300px;
     margin: 25% auto;
     border: 2px solid black;
+    background-color: white;
+    
+    
 }
 
 .calc-window{
@@ -11,6 +14,7 @@
     margin: 10px;
     height: 50px;
     color: white;
+    background-color: gray;
 }
 
 .calc-buttons{
@@ -30,12 +34,21 @@
 
 .op{
     margin: 20px;
+    background-color: lightskyblue;
 }
 
 .clear{
-    margin: 20px;
+    margin: 20px 15px;
+    background-color: maroon;
+    color: white;
 }
 
+
 body {
-    background:url('0.gif') ;
+    background-image: url('IMG_5507.jpg');
+    opacity: 0.9;
+}
+
+html{
+    opacity: 0.7;
 }
