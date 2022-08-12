@@ -7,6 +7,7 @@ let currentNum = '';
 let currentOp = '';
 let prevNum = '';
 let total = 0;
+let totalOperation = false;
 
 
 
@@ -45,6 +46,10 @@ function operate(num1, num2, operator){
     return 'Please use a math operation';
 }
 
+function roundToTwo(num) {
+    return +(Math.round(num + "e+2")  + "e-2");
+}
+
 //need to debug both loops below to make sure calculator display works
 nums.forEach(num => num.addEventListener('click', () => {
     currentNum += num.textContent;
@@ -58,6 +63,7 @@ nums.forEach(num => num.addEventListener('click', () => {
     //console.log(currentNum);
 }));
 
+
 //check to make sure that when equal is pressed operate is working correctly
 ops.forEach(op => op.addEventListener('click', () => {
     
@@ -69,11 +75,12 @@ ops.forEach(op => op.addEventListener('click', () => {
         else{
             //This will be if there are 2 numbers and and operator 
             //saved and another operator is pressed
-            if(currentNum === '0' && currentOp === '/'){
+            if(currentNum === '0' && currentOp === '/' && prevNum !== 'ss'){
                 alert('NO DIVING BY ZERO');
                 currentNum = '';
             }else{
-                total = operate(parseInt(prevNum, 10),parseInt(currentNum, 10), currentOp);
+                let noRoundTotal = (operate(parseFloat(prevNum, 10),parseFloat(currentNum, 10), currentOp)).toFixed(2);
+                total = roundToTwo(noRoundTotal);
                 prevNum = total;
                 if(op.textContent === '='){
                     currentOp = '';
@@ -88,8 +95,8 @@ ops.forEach(op => op.addEventListener('click', () => {
             return;
         }
         else {
-            if(total != 0){
-            currentOp = op.textContent;
+            if(total != 0 || prevNum !== ''){
+                currentOp = op.textContent;
             }else {
                 currentOp = op.textContent;
                 prevNum = currentNum;
